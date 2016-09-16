@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-9">
+            <div class="row vs-page-title">
+                <h1>ЛУЧШИЕ ПРЕДЛОЖЕНИЯ и АКЦИИ</h1>    
+            </div>
+            <div class="vs-page-content">
+                <div class="row vs-items-row">
+                    {% for hotTour in hotTours %}
+                    {% if (loop.index0 > 0) and (loop.index0 % 3 == 0) %}
+                </div>
+                <div class="row">
+                    {% endif %}
+                    <div class="col-md-4">
+                        <a href="#" class="vs-hottour-link">
+                            <div class="vs-hottour">
+                                <img src="/uploads/images/{{ hotTour.image }}" />
+                                <div class="vs-title">{{ hotTour.title }}</div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+{% endblock %}

@@ -1,0 +1,93 @@
+@font-face {
+	font-family: "ProximaNova Regular";
+	src: local('Proxima'), url("../fonts/Proxima Nova Regular.otf") format("opentype");
+}
+
+@main-bg:	#ECEDEF;
+@green: 	rgb(85, 110, 9);
+
+body {
+	background: @main-bg;
+	font-family: "ProximaNova Regular"
+}
+
+a, a:hover, a:active, a:focus {
+	color: #434343;
+	text-decoration: none;
+}
+
+.vs-head {
+	background: url('../images/bg_hd1.gif') repeat-x;
+	height: 160px;
+
+	.contacts-row {
+		text-align: right;
+	}
+
+	nav {
+		min-height: 45px;
+		height: 45px;
+		border-top: none;
+	}
+
+	.navbar-brand {
+		padding: 0px;
+	}
+
+	> .container {
+		height: 97px;
+		background: transparent url("../images/hd221.jpg") no-repeat scroll right bottom;
+	}
+
+	.vs-head-green-line {
+		height: 18px;
+	}
+}
+
+.vs-head {
+}
+.vs-head .navbar-nav {
+	border-radius: 0px 0px 15px 15px;
+	background: rgba(255, 255, 255, 0.7);
+	overflow: hidden;
+}
+.navbar-nav > li > a {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.vs-page-content {
+	background: #fff;
+	border-radius: 20px;
+	padding: 30px 15px;
+	box-shadow: 1px 5px 10px 2px rgba(0, 0, 0, 0.2);
+
+	.vs-items-row {
+		margin-bottom: 30px;
+	}
+
+	.vs-hottour-link {
+		color: @green;
+	}
+
+	.vs-hottour {
+		background: @main-bg;
+		border-radius: 8px;
+		border: 1px solid #748EDC;
+		padding: 6px;
+
+		img {
+			width: 100%;
+			//bor
+		}
+
+		.vs-title {
+			height: 40px;
+		}
+	}
+	.vs-hottour:active,
+	.vs-hottour:focus,
+	.vs-hottour:hover {
+		box-shadow: 0px 0px 7px 2px rgba(0,0,120,0.3)
+	}
+}
+

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>Лучшие предложения</h1>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Username</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			{% for country in countries %}
+			<tr>
+				<th scope="row">1</th>
+				<td>{{ country.id }}</td>
+				<td>{{ country.title }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

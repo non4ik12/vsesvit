@@ -2,18 +2,18 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Countries;
+// use AppBundle\Entity\Countries;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class CountriesController extends Controller
+class CountriesController extends BaseController
 {
 	/**
      * @Route("/countries", name="countries_list")
      */
     public function indexAction(Request $request)
     {
+        extract(parent::indexAction($request));
         $countries = $this->getDoctrine()
         	->getRepository('AppBundle:Countries')
         	->findAll();

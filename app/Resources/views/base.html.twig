@@ -36,7 +36,13 @@
                                 <a class="navbar-brand" href="#"><img class="logo" src="/images/subdomains_logo_1_8.gif" /></a>
                             </div>
                             <div class="vs-head-green-line">
-                                <a href="#">Регистрация</a>
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <a href="/profile">Профиль</a>
+                                <a href="{{ path('fos_user_security_logout') }}">Выйти</a>
+                                {% else %}
+                                <a href="{{ path('fos_user_security_login') }}">Авторизация</a>
+                                <a href="{{ path('fos_user_registration_register') }}">Регистрация</a>
+                                {% endif %}
                             </div>
                             <div id="navbar" class="collapse navbar-collapse">
                                 <ul class="nav navbar-nav">

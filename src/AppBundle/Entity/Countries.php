@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Countries
 {
+
     /**
      * @var int
      *
@@ -35,6 +36,11 @@ class Countries
      */
     private $continentId;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Continents", inversedBy="countriesList")
+     * @ORM\JoinColumn(name="continent_id", referencedColumnName="id")
+     */
+    protected $continent;
 
     /**
      * Get id
@@ -92,6 +98,37 @@ class Countries
     public function getContinentId()
     {
         return $this->continentId;
+    }
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", length=5000)
+     */
+    private $description;
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Countries
+     */
+    public function setDescription($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }
 

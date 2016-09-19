@@ -1,0 +1,12 @@
+<div class="vs-continent-title">
+	<a href="/continents/info/{{ continent.id }}">{{ continent.title }}</a>
+</div>
+<ul>
+	
+	{% for country in continent.countriesList %}
+	
+		<li><a href="/countries/info/{{ country.id }}">{{ country.title }}</a></li>
+
+	{% endfor %}
+
+</ul>

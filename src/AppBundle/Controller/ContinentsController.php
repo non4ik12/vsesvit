@@ -5,10 +5,10 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-class CountriesController extends BaseController
+class ContinentsController extends BaseController
 {
 	/**
-     * @Route("/countries", name="countries_list")
+     * @Route("/continents", name="continents")
      */
     public function indexAction(Request $request)
     {
@@ -23,18 +23,18 @@ class CountriesController extends BaseController
         ]);
     }
 
-    /**
-     * @Route("/countries/info/{id}", name="countries")
+	/**
+     * @Route("/continents/info/{id}", name="continents")
      */
     public function infoAction($id = null)
     {
-        if (empty($id)) die();
-        $country = $this->getDoctrine()
-                        ->getRepository('AppBundle:Countries')
+    	if (empty($id)) die();
+        $continent = $this->getDoctrine()
+                        ->getRepository('AppBundle:Continents')
                         ->find($id);
 
-        return $this->render('countries/info.html.twig', [
-            'country' => $country
+        return $this->render('continents/info.html.twig', [
+        	'continent' => $continent
         ]);
     }
 }

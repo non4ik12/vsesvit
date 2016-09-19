@@ -10,4 +10,15 @@ namespace AppBundle\Repository;
  */
 class ContinentsRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    
+    /**
+     * Get countries
+     *
+     * @return Countries
+     */
+    public function getCountries()
+    {
+        return $this->countries;
+    }
 }

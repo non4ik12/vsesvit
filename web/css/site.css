@@ -2,9 +2,14 @@
   font-family: "ProximaNova Regular";
   src: local('Proxima'), url("../fonts/Proxima Nova Regular.otf") format("opentype");
 }
+@font-face {
+  font-family: "ProximaNova SemiBold";
+  src: local('ProximaSemiBold'), url("../fonts/Proxima Nova Semibold.otf") format("opentype");
+}
 body {
   background: #ECEDEF;
   font-family: "ProximaNova Regular";
+  color: #414141;
 }
 a,
 a:hover,
@@ -41,12 +46,14 @@ a:focus {
   overflow: hidden;
 }
 .navbar-nav > li > a {
+  font-family: "ProximaNova SemiBold";
+  font-size: 15px;
   padding-top: 5px;
   padding-bottom: 5px;
 }
 .vs-page-content {
   background: #fff;
-  border-radius: 20px;
+  border-radius: 4px;
   padding: 30px 15px;
   box-shadow: 1px 5px 10px 2px rgba(0, 0, 0, 0.2);
 }

@@ -22,4 +22,12 @@ class DefaultController extends BaseController
             'hotTours' => $hotTours,
         ]);
     }
+
+    /**
+     * @Route("/contacts", name="contacts")
+     */
+    public function contactsAction(Request $request)
+    {
+        return $this->render('default/contacts.html.twig');
+    }
 }

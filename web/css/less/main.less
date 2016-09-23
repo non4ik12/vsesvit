@@ -3,6 +3,9 @@
 @green-light: rgb(143, 177, 67);
 @base-color:  #fff;
 
+@font-normal: "ProximaNova Regular";
+@font-bold: "ProximaNova SemiBold";
+
 body {
 	background: @main-bg;
 	font-family: "ProximaNova Regular";
@@ -113,4 +116,17 @@ h1 {
 	background: @base-color;
 	margin-top: 15px;
 	margin-bottom: 15px;
+}
+
+.form-group.required .control-label:after { 
+   content:"*";
+   color:red;
+   margin-left: 3px;
+}
+
+.help-block {
+	.accept-label {
+		color: @green;
+		font-family: @font-bold;
+	}
 }

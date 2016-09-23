@@ -1,5 +1,7 @@
-@main-bg:	#ECEDEF;
-@green: 	rgb(85, 110, 9);
+@main-bg:	  #ECEDEF;
+@green: 	  rgb(85, 110, 9);
+@green-light: rgb(143, 177, 67);
+@base-color:  #fff;
 
 body {
 	background: @main-bg;
@@ -10,6 +12,16 @@ body {
 a, a:hover, a:active, a:focus {
 	color: #434343;
 	text-decoration: none;
+}
+
+h1 {
+	font-size: 24px;
+	background-color: @green-light;
+	border-radius: 4px;
+	color: @base-color;
+	padding: 5px 20px;
+	display: inline-block;
+	box-shadow: 0px 2px 4px 2px rgba(100,100,100,0.6);
 }
 
 .vs-head {
@@ -30,21 +42,22 @@ a, a:hover, a:active, a:focus {
 		padding: 0px;
 	}
 
-	> .container {
-		height: 97px;
-		background: transparent url("../images/hd221.jpg") no-repeat scroll right bottom;
-	}
-
 	.vs-head-green-line {
 		height: 18px;
 	}
-}
 
-.vs-head {
+	.vs-head-bg {
+		height: 97px;
+		background: transparent url("../images/hd221.jpg") no-repeat scroll right bottom;
+	}
 	.navbar-nav {
 		border-radius: 0px 0px 15px 15px;
 		background: rgba(255, 255, 255, 0.7);
 		overflow: hidden;
+	}
+	.vs-second-navbar #navbar {
+		margin-left: 222px;
+		padding: 5px 0px 0px;
 	}
 }
 .navbar-nav > li > a {
@@ -52,6 +65,9 @@ a, a:hover, a:active, a:focus {
 	font-size: 15px;
 	padding-top: 5px;
 	padding-bottom: 5px;
+}
+.vs-page-title {
+	text-align: center;
 }
 .vs-page-content {
 	background: #fff;
@@ -87,4 +103,14 @@ a, a:hover, a:active, a:focus {
 		box-shadow: 0px 0px 7px 2px rgba(0,0,120,0.3)
 	}
 }
-
+.vs-footer-line {
+	background: rgb(143, 154, 220);
+	height: 20px;
+	text-align: center;
+	color: @base-color;
+}
+.vs-info-block {
+	background: @base-color;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}

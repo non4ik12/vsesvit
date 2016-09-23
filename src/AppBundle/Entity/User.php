@@ -25,9 +25,4 @@ class User extends BaseUser
         // your own logic
     }
 
-    public function isLoggedIn() {
-        return true;
-        // $user = $this->getUser();
-        // return (!is_object($user) || !$user instanceof UserInterface);
-    }
 }

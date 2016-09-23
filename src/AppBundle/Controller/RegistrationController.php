@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Event\FormEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use FOS\UserBundle\Controller\RegistrationController as BaseRegistrationController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,7 +12,7 @@ use FOS\UserBundle\Event\GetResponseUserEvent;
 class RegistrationController extends BaseRegistrationController
 {
     /**
-     * @Route("/register/", name="register")
+     * @Route("/ssregister/", name="register")
      */
     public function registerAction(Request $request)
     {

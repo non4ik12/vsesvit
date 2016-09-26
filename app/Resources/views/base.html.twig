@@ -37,6 +37,9 @@
                             </div>
                             <div class="vs-head-green-line">
                                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                <a href="/admin">Админка</a>    
+                                {% endif %}
                                 <a href="/profile">Профиль</a>
                                 <a href="{{ path('fos_user_security_logout') }}">Выйти</a>
                                 {% else %}

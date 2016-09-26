@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
-	<div class="row">
+    <div class="vs-page-title">
 		<h1>{{ country.title }}</h1>
-		<p>{{ country.description }}</p>
+	</div>
+	<div class="row-fluid vs-page-content">
+		{% autoescape %}
+			{{ country.description|raw }} {# var won't be escaped #}
+		{% endautoescape %}
 	</div>
 
 {% endblock %}

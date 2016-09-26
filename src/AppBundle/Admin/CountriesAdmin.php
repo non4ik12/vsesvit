@@ -8,7 +8,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
-class ContinentsAdmin extends AbstractAdmin
+class CountriesAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper) {
         $formMapper

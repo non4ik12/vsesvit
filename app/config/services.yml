@@ -7,8 +7,13 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-    admin.category:
+    admin.continents:
         class: AppBundle\Admin\ContinentsAdmin
         arguments: [~, AppBundle\Entity\Continents, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Continents }
+    admin.countries:
+        class: AppBundle\Admin\CountriesAdmin
+        arguments: [~, AppBundle\Entity\Countries, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Countries }

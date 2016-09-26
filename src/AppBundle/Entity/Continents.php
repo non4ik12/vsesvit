@@ -97,9 +97,9 @@ class Continents
      *
      * @return Continents
      */
-    public function setDescription($title)
+    public function setDescription($description)
     {
-        $this->title = $title;
+        $this->description = $description;
 
         return $this;
     }

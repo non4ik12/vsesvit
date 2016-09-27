@@ -29,6 +29,9 @@ class AppKernel extends Kernel
 
             // CK Editor
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+
+            // Captcha
+            // new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

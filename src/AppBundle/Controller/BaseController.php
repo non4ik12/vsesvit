@@ -2,22 +2,18 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use AppBundle\Entity\ContactForm;
+use AppBundle\Form\ContactType;
+use AppBundle\Form\Type\ContactformType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Form\ContactType;
 
 class BaseController extends Controller
 {
-    public function indexAction(Request $request)
+    public function getContactFormAction()
     {
-        return [
-            'user' => $this->getUser(),
-        ];
+        $contactData = new ContactForm();
+        $contactForm = $this->createForm(ContactformType::class, $contactData);
+        return $this->render('contact_form.html.twig', ['form' => $contactForm->createView()]);
     }
-
-	public function buildForm(FormBuilderInterface $builder, array $options)
-	{
-	    $builder->add('category', ContactType::class);
-	}
 }

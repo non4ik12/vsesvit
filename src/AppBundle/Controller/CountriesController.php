@@ -12,8 +12,6 @@ class CountriesController extends BaseController
      */
     public function indexAction(Request $request)
     {
-        extract(parent::indexAction($request));
-
         $continents = $this->getDoctrine()
                         ->getRepository('AppBundle:Continents')
                         ->findAll();

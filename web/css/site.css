@@ -116,3 +116,10 @@ h1 {
   color: #556e09;
   font-family: "ProximaNova SemiBold";
 }
+.vs-contact_form textarea {
+  resize: none;
+  height: 115px;
+}
+.vs-contact_form .captcha-block img {
+  max-width: 100%;
+}

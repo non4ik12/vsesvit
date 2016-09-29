@@ -7,23 +7,5 @@
     <noscript><img src='//kurs.com.ua/static/images/informer/kurs.png' width='52' height='26' alt='kurs.com.ua: курс валют в Украине!' title='Курс валют' border='0' /></noscript>
     <!--//Kurs.com.ua main 300x130 Киев blue-->
 
-    <div class="row-fluid">
-    	{{ form_start(form) }}
-
-    		<div class="form-group">
-	    		{{ form_label(form.userEmail) }}
-	    		{{ form_errors(form.userEmail) }}
-	    		{{ form_widget(form.userEmail) }}
-    		</div>
-
-    		<div class="form-group">
-	    		{{ form_label(form.content) }}
-	    		{{ form_errors(form.content) }}
-	    		{{ form_widget(form.content) }}
-    		</div>
-
-    		{{ form_row(form._token) }}
-
-		{{ form_end(form) }}
-    </div>
+    {{ render (controller("AppBundle:Base:getContactForm")) }}
 </div>

@@ -31,7 +31,7 @@ class AppKernel extends Kernel
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
 
             // Captcha
-            // new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
@@ -46,7 +46,7 @@ class AppKernel extends Kernel
 
     public function getRootDir()
     {
-        return __DIR__;
+	    return __DIR__;
     }
 
     public function getCacheDir()

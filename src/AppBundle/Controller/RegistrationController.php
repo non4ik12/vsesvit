@@ -2,12 +2,12 @@
 
 namespace AppBundle\Controller;
 
-use FOS\UserBundle\FOSUserEvents;
-use FOS\UserBundle\Event\FormEvent;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use FOS\UserBundle\Controller\RegistrationController as BaseRegistrationController;
-use Symfony\Component\HttpFoundation\Request;
+use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\FOSUserEvents;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class RegistrationController extends BaseRegistrationController
 {
@@ -25,8 +25,7 @@ class RegistrationController extends BaseRegistrationController
 
         $user = $userManager->createUser();
         $user->setEnabled(true);
-// var_dump($request);
-// die();
+
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
 
@@ -47,7 +46,7 @@ class RegistrationController extends BaseRegistrationController
                 $userManager->updateUser($user);
 
                 if (null === $response = $event->getResponse()) {
-                    $url = $this->generateUrl('fos_user_registration_confirmed');
+                    $url      = $this->generateUrl('fos_user_registration_confirmed');
                     $response = new RedirectResponse($url);
                 }
 

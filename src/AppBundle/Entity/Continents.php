@@ -16,17 +16,31 @@ class Continents
     /**
      * @ORM\OneToMany(targetEntity="Countries", mappedBy="continent")
      */
-    protected $countriesList;
-
+    protected $countries;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Cities", mappedBy="continent")
+     */
+    protected $cities;
     
     /**
      * Get countries
      *
      * @return Countries
      */
-    public function getCountriesList()
+    public function getCountries()
     {
-        return $this->countriesList;
+        return $this->countries;
+    }
+
+    /**
+     * Get cities
+     *
+     * @return Cities
+     */
+    public function getCities()
+    {
+        return $this->cities;
     }
 
     /**

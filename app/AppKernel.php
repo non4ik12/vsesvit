@@ -32,6 +32,9 @@ class AppKernel extends Kernel
 
             // Captcha
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+
+            // BreadCrumbs
+            new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -8,13 +8,20 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class ContinentsAdmin extends AbstractAdmin
+class CitiesAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->add('title', 'text')
-            // ->add('description', 'textarea')
+            ->add('continent_id', 'entity', [
+                'class'        => 'AppBundle:Continents',
+                'choice_label' => 'title',
+            ])
+            ->add('country_id', 'entity', [
+                'class'        => 'AppBundle:Countries',
+                'choice_label' => 'title',
+            ])
             ->add('description', CKEditorType::class, [
                 'config' => [
                     'uiColor' => '#ffffff',

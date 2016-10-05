@@ -22,7 +22,7 @@ class CountriesController extends BaseController
     }
 
     /**
-     * @Route("/countries/info/{id}", name="countries")
+     * @Route("/countries/info/{id}", name="country_info")
      */
     public function infoAction($id = null)
     {

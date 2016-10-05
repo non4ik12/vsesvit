@@ -2,8 +2,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\ContactForm;
-use AppBundle\Form\Type\ContactformType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -19,7 +17,7 @@ class DefaultController extends BaseController
             ->findAll();
 
         return $this->render('default/index.html.twig', [
-            'hotTours'    => $hotTours,
+            'hotTours' => $hotTours,
         ]);
     }
 

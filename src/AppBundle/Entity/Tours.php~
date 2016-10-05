@@ -90,7 +90,7 @@ class Tours
     public $country;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cities", inversedBy="tours")
+     * @ORM\ManyToOne(targetEntity="Cities")
      * @ORM\JoinColumn(name="city_id", referencedColumnName="id")
      */
     public $city;
@@ -296,77 +296,5 @@ class Tours
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set continent
-     *
-     * @param \AppBundle\Entity\Continents $continent
-     *
-     * @return Tours
-     */
-    public function setContinent(\AppBundle\Entity\Continents $continent = null)
-    {
-        $this->continent = $continent;
-
-        return $this;
-    }
-
-    /**
-     * Get continent
-     *
-     * @return \AppBundle\Entity\Continents
-     */
-    public function getContinent()
-    {
-        return $this->continent;
-    }
-
-    /**
-     * Set country
-     *
-     * @param \AppBundle\Entity\Countries $country
-     *
-     * @return Tours
-     */
-    public function setCountry(\AppBundle\Entity\Countries $country = null)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country
-     *
-     * @return \AppBundle\Entity\Countries
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
-     * Set city
-     *
-     * @param \AppBundle\Entity\Cities $city
-     *
-     * @return Cities
-     */
-    public function setCity(\AppBundle\Entity\Cities $city = null)
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    /**
-     * Get city
-     *
-     * @return \AppBundle\Entity\Cities
-     */
-    public function getCity()
-    {
-        return $this->city;
     }
 }

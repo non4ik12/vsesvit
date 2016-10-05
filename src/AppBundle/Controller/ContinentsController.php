@@ -24,7 +24,7 @@ class ContinentsController extends BaseController
     }
 
 	/**
-     * @Route("/continents/info/{id}", name="continents")
+     * @Route("/continents/info/{id}", name="continent_info")
      */
     public function infoAction($id = null)
     {

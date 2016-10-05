@@ -11,7 +11,7 @@
         <div class="row">
             {% endif %}
             <div class="col-md-4">
-                <a href="#" class="vs-hottour-link">
+                <a href="{{ path('tour_info', {'id': hotTour.id}) }}" class="vs-hottour-link">
                     <div class="vs-hottour">
                         <img src="/uploads/images/{{ hotTour.image }}" />
                         <div class="vs-title">{{ hotTour.title }}</div>

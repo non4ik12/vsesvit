@@ -11,9 +11,24 @@ services:
         class: AppBundle\Admin\ContinentsAdmin
         arguments: [~, AppBundle\Entity\Continents, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Continents }
+            - { name: sonata.admin, manager_type: orm, label: Континенты }
     admin.countries:
         class: AppBundle\Admin\CountriesAdmin
         arguments: [~, AppBundle\Entity\Countries, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Countries }
+            - { name: sonata.admin, manager_type: orm, label: Страны }
+    admin.cities:
+        class: AppBundle\Admin\CitiesAdmin
+        arguments: [~, AppBundle\Entity\Cities, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Города }
+    admin.tours:
+        class: AppBundle\Admin\ToursAdmin
+        arguments: [~, AppBundle\Entity\Tours, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Туры }
+    admin.contactform:
+        class: AppBundle\Admin\ContactFormAdmin
+        arguments: [~, AppBundle\Entity\ContactForm, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Почта }

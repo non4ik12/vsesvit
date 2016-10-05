@@ -37,10 +37,25 @@ class Countries
     private $continentId;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Continents", inversedBy="countriesList")
+     * @ORM\ManyToOne(targetEntity="Continents", inversedBy="countries")
      * @ORM\JoinColumn(name="continent_id", referencedColumnName="id")
      */
     protected $continent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Cities", mappedBy="country")
+     */
+    protected $cities;
+
+    /**
+     * Get cities
+     *
+     * @return Cities
+     */
+    public function getCities()
+    {
+        return $this->cities;
+    }
 
     /**
      * Get id
@@ -129,6 +144,30 @@ class Countries
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set continent
+     *
+     * @param string $continent
+     *
+     * @return Continents
+     */
+    public function setContinent($continent)
+    {
+        $this->continent = $continent;
+
+        return $this;
+    }
+
+    /**
+     * Get continent
+     *
+     * @return string
+     */
+    public function getContinent()
+    {
+        return $this->continent;
     }
 }
 

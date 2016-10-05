@@ -5,8 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <meta name="description" content="Отдых на море, туры, горящие путевки, морские круизы. Туризм, путешествия, низкие цены — туристическое агентство «ВсеСвит»">
+        <meta name="keywords" content="Всесвит агентство,Киев,Украина">
+        <meta property="og:description" content="Отдых на море, туры, горящие путевки, морские круизы. Туризм, путешествия, низкие цены — туристическое агентство «ВсеСвит»">
+        <meta name="robots" content="index, follow"> 
         <link rel="icon" href="../../favicon.ico">
 
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -33,7 +35,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 </button>
-                                <a class="navbar-brand" href="#"><img class="logo" src="/images/subdomains_logo_1_8.gif" /></a>
+                                <a class="navbar-brand" href="{{ path('homepage') }}"><img class="logo" src="/images/subdomains_logo_1_8.gif" /></a>
                             </div>
                             <div class="vs-head-green-line">
                                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -49,9 +51,9 @@
                             </div>
                             <div id="navbar" class="collapse navbar-collapse">
                                 <ul class="nav navbar-nav">
-                                    <li class="active"><a href="/">Home</a></li>
-                                    <li><a href="/visas">Visas</a></li>
-                                    <li><a href="/contacts">Contact</a></li>
+                                    <li class="active"><a href="{{ path('homepage') }}">Home</a></li>
+                                    <li><a href="{{ path('visas') }}">Visas</a></li>
+                                    <li><a href="{{ path('contacts') }}">Contact</a></li>
                                 </ul>
                             </div><!--/.nav-collapse -->
                         </nav>
@@ -67,15 +69,18 @@
                 <nav class="navbar">
                     <div id="navbar" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
-                            <li><a href="/countries">Countries</a></li>
-                            <li><a href="/rubrics">Rubrics</a></li>
-                            <li><a href="/cruises">Cruises</a></li>
+                            <li><a href="{{ path('countries_list') }}">Countries</a></li>
+                            <li><a href="{{ path('rubrics') }}">Rubrics</a></li>
+                            <li><a href="{{ path('cruises') }}">Cruises</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </nav>
             </div>
         </div>
 
+        <div class="breadcrumbs">
+            {{ wo_render_breadcrumbs() }}
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
@@ -90,8 +95,9 @@
         </div><!-- /.container -->
 
         {% block javascripts %}
-            <script src="js/jquery-3.1.0.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
+            <script src="{{ asset('js/jquery-3.1.0.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('js/vsesvit.js') }}"></script>
         {% endblock %}
         <div class="container-fluid">
             <div class="container">

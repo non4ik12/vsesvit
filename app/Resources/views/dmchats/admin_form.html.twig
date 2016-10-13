@@ -1,0 +1,60 @@
+<style type="text/css">
+	#dm-onchat {
+		width: 600px;
+	}
+
+	.dm-onchat-contacts {
+		float: left;
+		padding-right: 20px;
+		width: 100px;
+		border-right: 2px solid green;
+	}
+	
+	.dm-onchat-contacts ul {
+		padding: 0px;
+		margin: 0px;
+	}
+	.dm-onchat-contacts ul li a {
+		display: block;
+		background: rgba(200, 30, 30, 0.8);
+		padding: 7px 20px;
+		border-radius: 10px;
+		color: #fff;
+	}
+	.dm-onchat-contacts ul li.active a {
+		background: rgba(100, 30, 30, 0.8);
+	}
+
+
+</style>
+
+<div id="dm-onchat">
+	<div class="dm-onchat-content">
+		<div class="dm-onchat-close"><span>&times;</span></div>
+		<div class="dm-onchat-head">
+			<span class="dm-onchat-photo"></span>
+			<span class="dm-onchat-phrase  glyphicon glyphicon-envelope">Чат админа</span>
+		</div>
+		<div class="dm-onchat-body">
+			<div class="dm-onchat-contacts">
+				<ul class="nav nav-pills nav-stacked">
+				  <li role="presentation"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+				  <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+				  <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+				</ul>
+			</div>
+			<div>
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="home">
+						<div class="dm-onchat-dialog"></div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="profile">Таб 2</div>
+					<div role="tabpanel" class="tab-pane" id="messages">...</div>
+					<div role="tabpanel" class="tab-pane" id="settings">...</div>
+				</div>
+				<input type="text" class="dm-onchat-input" placeholder="Введите Ваше сообщение" />
+			</div>
+		</div>
+	</div>
+</div>
+<script>$("#dm-onchat").olchatadmin();</script>

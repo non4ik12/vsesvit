@@ -27,6 +27,11 @@ services:
         arguments: [~, AppBundle\Entity\Tours, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Туры }
+    admin.rubrics:
+        class: AppBundle\Admin\RubricsAdmin
+        arguments: [~, AppBundle\Entity\Rubrics, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Виды отдыха }
     admin.contactform:
         class: AppBundle\Admin\ContactFormAdmin
         arguments: [~, AppBundle\Entity\ContactForm, ~]

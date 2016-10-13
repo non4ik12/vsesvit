@@ -16,4 +16,20 @@ class BaseController extends Controller
         $contactForm = $this->createForm(ContactformType::class, $contactData);
         return $this->render('contact_form.html.twig', ['form' => $contactForm->createView()]);
     }
+
+    public function getDmChatAction()
+    {
+        $contactData = new ContactForm();
+        $contactForm = $this->createForm(ContactformType::class, $contactData);
+        return $this->render('dmchats/user_form.html.twig', ['form' => $contactForm->createView()]);
+    }
+
+    public function getDmChatAdminAction()
+    {
+        $contactData = new ContactForm();
+        $contactForm = $this->createForm(ContactformType::class, $contactData);
+        return $this->render('dmchats/admin_form.html.twig', ['form' => $contactForm->createView()]);
+    }
+
 }
+

@@ -78,10 +78,10 @@
             </div>
         </div>
 
-        <div class="breadcrumbs">
-            {{ wo_render_breadcrumbs() }}
-        </div>
         <div class="container">
+            <div class="breadcrumbs">
+                {{ wo_render_breadcrumbs() }}
+            </div>
             <div class="row">
                 <div class="col-md-9">
                     {% block body %}{% endblock %}
@@ -96,8 +96,10 @@
 
         {% block javascripts %}
             <script src="{{ asset('js/jquery-3.1.0.min.js') }}"></script>
+            <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
             <script src="{{ asset('js/bootstrap.min.js') }}"></script>
             <script src="{{ asset('js/vsesvit.js') }}"></script>
+            <script src="{{ asset('js/bower_components/socket.io-client/socket.io.js') }}"></script>
         {% endblock %}
         <div class="container-fluid">
             <div class="container">
@@ -114,5 +116,14 @@
                 Copyright © 2007-2016. Все права защищены.
             </div>
         </div>
+
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and is_granted('ROLE_SUPER_ADMIN') %}
+            <script src="{{ asset('js/olchatadmin.js') }}"></script>
+            {{ render (controller("AppBundle:Base:getDmChatAdmin")) }}
+        {% else %}
+            <script src="{{ asset('js/olchat.js') }}"></script>
+            {{ render (controller("AppBundle:Base:getDmChat")) }}
+        {% endif %}
+
     </body>
 </html>

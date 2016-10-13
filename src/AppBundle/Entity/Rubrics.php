@@ -28,6 +28,12 @@ class Rubrics
      */
     private $title;
 
+    /**
+     * @var description
+     *
+     * @ORM\Column(name="description", type="string", length=10000)
+     */
+    private $description;
 
     /**
      * Get id
@@ -61,6 +67,30 @@ class Rubrics
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Rubrics
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }
 

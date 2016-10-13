@@ -52,6 +52,13 @@ class Tours
     /**
      * @var int
      *
+     * @ORM\Column(name="rubric_id", type="integer")
+     */
+    private $rubricId;
+
+    /**
+     * @var int
+     *
      * @ORM\Column(name="ishot", type="integer")
      */
     private $ishot;
@@ -88,6 +95,12 @@ class Tours
      * @ORM\JoinColumn(name="country_id", referencedColumnName="id")
      */
     public $country;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Rubrics")
+     * @ORM\JoinColumn(name="rubric_id", referencedColumnName="id")
+     */
+    public $rubric;
 
     /**
      * @ORM\ManyToOne(targetEntity="Cities", inversedBy="tours")
@@ -200,6 +213,30 @@ class Tours
     public function getCityId()
     {
         return $this->cityId;
+    }
+
+    /**
+     * Set rubricId
+     *
+     * @param integer $rubricId
+     *
+     * @return Tours
+     */
+    public function setRubricId($rubricId)
+    {
+        $this->rubricId = $rubricId;
+
+        return $this;
+    }
+
+    /**
+     * Get rubricId
+     *
+     * @return int
+     */
+    public function getRubricId()
+    {
+        return $this->rubricId;
     }
 
     /**

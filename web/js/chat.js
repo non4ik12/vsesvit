@@ -24,8 +24,11 @@ io.on('connection', function(socket){
     var address = socket.handshake.address, ip;
     ip = (address.address === undefined) ? address : address.address;
 
-    // console.log('New connection from ' + ip + "(" + socket.id + ")");
-    //console.log(socket.request.connection.remoteAddress);
+    function getIP(sockInfo) {
+        var address = sockInfo.handshake.address;
+        console.log(socket.request.connection.remoteAddress);
+        return (address.address === undefined) ? address : address.address;
+    }
 
     function showChat(uid) {
         io.to(clients[uid]).emit('show chat', '1');
@@ -41,7 +44,7 @@ io.on('connection', function(socket){
     });
 
     socket.on('to user', function(data){
-        console.log('(Admin): Send message to: ' + data.uid);
+        console.log('Admin (' + getIP(socket) + '): Send message to: ' + data.uid);
         io.sockets.to(clients[data.uid]).emit('to user', {
             msg: data.msg,
             uid: data.aid 
@@ -52,22 +55,22 @@ io.on('connection', function(socket){
 
         if (data.moderatorUid !== undefined) {
             // Если клиенту назначен модератор
-            console.log('(User): Send message to defined: ' + data.moderatorUid);
+            console.log('User (' + getIP(socket) + '): Send message to defined: ' + data.moderatorUid);
             io.sockets.to(admins[data.moderatorUid]).emit(data);
         } else {
             // Назначаем модератора
             var modUid = getModerator();
-            console.log('(User): Send message to: ' + modUid);
+            console.log('User (' + getIP(socket) + '): Send message to: ' + modUid);
             io.sockets.to(admins[modUid]).emit("to moderator", data);
         }
     });
 
     socket.on("userAuth", function(user) {
         if (clients[user.uid] !== undefined) {
-            console.log('Пользователь зашел на страницу: ' +  user.page );
+            console.log('User (' + getIP(socket) + ') зашел на страницу: ' +  user.page );
             showChat(user.uid);
         } else {
-            console.log('Новый юзер.');
+            console.log('User (' + getIP(socket) + ') новый.');
         }
         clients[user.uid] = socket.id;
     });
@@ -75,9 +78,9 @@ io.on('connection', function(socket){
     socket.on("adminAuth", function(mod) {
         console.log(admins);
         if (admins[mod.uid] !== undefined) {
-            console.log('Админ лазит по страницам.');
+            console.log('Admin (' + getIP(socket) + ') перешел на другую страницу страницам.');
         } else {
-            console.log('Пришел админ.');
+            console.log('Admin (' + getIP(socket) + ') зашел на сайт.');
         }
         admins[mod.uid] = socket.id;
         console.log(admins);

@@ -5,7 +5,7 @@
             userId: 'dmChatUserId',
             history: 'dmChatHistoriess'
         },
-        currentDialog: null,
+        _currentDialog: null,
         childs: null,
         options: {
             server: "http://vsesvit.local:8008",
@@ -56,7 +56,7 @@
             if (e.which == 13) {
                 var data = {
                     msg: this.childs.field.val(),
-                    uid: $(this.childs.contacts.find("li.active")).data("uid"),
+                    uid: this._currentDialog.uid,
                     aid: this.userId
                 }
                     
@@ -127,27 +127,32 @@
         },
         _appendUserMsg: function(data) {
             console.log(data);
-            this.currentDialog.append($("<div />").addClass("message-row").append($("<div />").addClass("dm-onchat-photo")).append($("<div />").addClass("message admin-message").text(data.msg)));
-            this.currentDialog.animate({
-                scrollTop: this.currentDialog.prop("scrollHeight") - this.currentDialog.height()
+            this._currentDialog.content.append($("<div />").addClass("message-row").append($("<div />").addClass("dm-onchat-photo")).append($("<div />").addClass("message admin-message").text(data.msg)));
+            this._currentDialog.content.animate({
+                scrollTop: this._currentDialog.content.prop("scrollHeight") - this._currentDialog.content.height()
             }, 20);
         },
         _newDialog: function(uid) {
-            this.childs.contacts.find('ul').append(
-                $("<li />").data("uid", uid).attr({ role: "presentation"})
+            var _item = $("<li />").data("uid", uid).attr({ role: "presentation"})
                     .append($("<a />").attr({
                         href:            "#"+uid,
                         "aria-controls": uid,
                         role:            "tab",
                         "data-toggle":   "tab"
                     }).text(uid))
-            );
-            this.currentDialog = $("<div />").attr({
+                    .appendTo(this.childs.contacts.find('ul'));
+            this._on(_item, {
+                click: "_switchDialog"
+            })
+            this._currentDialog = {
+                content: $("<div />").attr({
                     role: "tabpanel",
                     id: uid
                 }).addClass("tab-pane")
-            .appendTo(this.childs.tabs);
-            console.log(this.currentDialog);
+                .appendTo(this.childs.tabs),
+                uid: uid
+            }
+            this._scrollTab(this._currentDialog.content);
         },
         _getUid: function() {
             this.userId = localStorage.getItem(this.storage.userId);
@@ -159,6 +164,20 @@
                 uid: this.userId,
                 page: window.location.href
             });
+        },
+        _switchDialog: function(e) {
+            var uid = $(e.target).parent().data("uid");
+            this._currentDialog = {
+                content: $("#"+uid),
+                uid: uid
+            }
+            this._scrollTab(this._currentDialog.content);
+        },
+        _scrollTab: function(block) {
+            block.animate({
+                scrollTop: block.prop("scrollHeight") - block.height()
+            }, 20);
+
         },
         _generateUid: function() {
             return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

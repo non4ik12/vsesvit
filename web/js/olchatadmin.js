@@ -5,6 +5,7 @@
             userId: 'dmChatUserId',
             history: 'dmChatHistoriess'
         },
+        currentDialog: null,
         childs: null,
         options: {
             server: "http://vsesvit.local:8008",
@@ -13,9 +14,10 @@
                 field: "dm-onchat-input",
                 content: "dm-onchat-content",
                 body: "dm-onchat-body",
-                dialog: "dm-onchat-dialog",
                 close_block: "dm-onchat-close",
-                close_btn: "dm-onchat-close span"
+                close_btn: "dm-onchat-close span",
+                contacts: "dm-onchat-contacts",
+                tabs: "dm-onchat-tabs"
             }
         },
         _create: function() {
@@ -29,8 +31,11 @@
             this.socket.on('show chat', function() {
                 self._showDialog();
             });
-            this.socket.on('to moderator', function(msg) {
-                self._appendNewMessage(msg);
+            this.socket.on('to moderator', function(data) {
+                if (!$('#'+data.uid).length) {
+                    self._newDialog(data.uid);
+                }
+                self._appendNewMessage(data);
             });
             this._getUid();
             $.each(this.options.classes, function(a, b) {
@@ -49,13 +54,19 @@
         },
         _sendMessage: function(e) {
             if (e.which == 13) {
-                var msg = this.childs.field.val();
+                var data = {
+                    msg: this.childs.field.val(),
+                    uid: $(this.childs.contacts.find("li.active")).data("uid"),
+                    aid: this.userId
+                }
+                    
                 this.childs.head.hide();
-                this.socket.emit('to moderator', msg);
-                this._appendUserMsg(msg);
+                this.socket.emit('to user', data);
+                this._appendUserMsg(data);
                 this._toHistory({
+                    uid: data.uid,
                     sender: 'moderator',
-                    message: msg
+                    message: data.msg
                 });
                 this.childs.field.val('');
             }
@@ -85,31 +96,58 @@
                 this.childs.head.hide();
                 $.each(currentHistory, function(a, b) {
                     if (b.sender == 'user') {
-                        self._appendUserMsg(b.message);
+                        self._appendUserMsg({uid: b.uid, msg: b.message});
                     } else {
                         self._appendAdminMsg(b.message);
                     }
                 });
             }
         },
-        _appendNewMessage: function(msg) {
-            this._appendAdminMsg(msg);
+        _appendNewMessage: function(data) {
+            this._appendAdminMsg(data);
             this._toHistory({
+                uid: data.uid,
                 sender: 'user',
-                message: msg
+                message: data.msg
             });
         },
-        _appendAdminMsg: function(msg) {
-            this.childs.dialog.append($("<div />").addClass("message-row").append($("<div />").addClass("message user-message").text(msg)));
-            this.childs.dialog.animate({
-                scrollTop: this.childs.dialog.prop("scrollHeight") - this.childs.dialog.height()
+        _appendAdminMsg: function(data) {
+            var tab = $("#"+data.uid);
+            tab.append(
+                $("<div />")
+                    .addClass("message-row")
+                    .append(
+                        $("<div />")
+                            .addClass("message user-message").text(data.msg)
+                    )
+            );
+            tab.animate({
+                scrollTop: tab.prop("scrollHeight") - tab.height()
             }, 20);
         },
-        _appendUserMsg: function(msg) {
-            this.childs.dialog.append($("<div />").addClass("message-row").append($("<div />").addClass("dm-onchat-photo")).append($("<div />").addClass("message admin-message").text(msg)));
-            this.childs.dialog.animate({
-                scrollTop: this.childs.dialog.prop("scrollHeight") - this.childs.dialog.height()
+        _appendUserMsg: function(data) {
+            console.log(data);
+            this.currentDialog.append($("<div />").addClass("message-row").append($("<div />").addClass("dm-onchat-photo")).append($("<div />").addClass("message admin-message").text(data.msg)));
+            this.currentDialog.animate({
+                scrollTop: this.currentDialog.prop("scrollHeight") - this.currentDialog.height()
             }, 20);
+        },
+        _newDialog: function(uid) {
+            this.childs.contacts.find('ul').append(
+                $("<li />").data("uid", uid).attr({ role: "presentation"})
+                    .append($("<a />").attr({
+                        href:            "#"+uid,
+                        "aria-controls": uid,
+                        role:            "tab",
+                        "data-toggle":   "tab"
+                    }).text(uid))
+            );
+            this.currentDialog = $("<div />").attr({
+                    role: "tabpanel",
+                    id: uid
+                }).addClass("tab-pane")
+            .appendTo(this.childs.tabs);
+            console.log(this.currentDialog);
         },
         _getUid: function() {
             this.userId = localStorage.getItem(this.storage.userId);
@@ -117,11 +155,10 @@
                 this.userId = this._generateUid();
                 localStorage.setItem(this.storage.userId, this.userId);
             }
-            this.socket.emit("userAuth", {
+            this.socket.emit("adminAuth", {
                 uid: this.userId,
                 page: window.location.href
             });
-            return this.userId;
         },
         _generateUid: function() {
             return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

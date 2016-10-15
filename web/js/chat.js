@@ -4,7 +4,7 @@ var options = {
 //    'log level': 0
 };
  
-var currentUIDS = adminsIds = [];
+var clients = [],  admins = [];
 
 var express = require('express');
 var app = express();
@@ -19,21 +19,6 @@ app.get('/', function (req, res) {
     res.sendfile(__dirname + '/index.html');
 });
 
-Array.prototype.contains = function(k, callback) {
-    var self = this;
-    return (function check(i) {
-        if (i >= self.length) {
-            return callback(false);
-        }
-
-        if (self[i] === k) {
-            return callback(true);
-        }
-
-        return process.nextTick(check.bind(null, i+1));
-    }(0));
-}
-
 
 io.on('connection', function(socket){
     var address = socket.handshake.address, ip;
@@ -43,41 +28,58 @@ io.on('connection', function(socket){
     //console.log(socket.request.connection.remoteAddress);
 
     function showChat(uid) {
-        io.to(currentUIDS[uid]).emit('show chat', '1');
+        io.to(clients[uid]).emit('show chat', '1');
+    }
+
+    function getModerator() {
+        var ak = Object.keys(admins);
+        return ak[Math.floor(Math.random()*ak.length)];
     }
 
     socket.on('disconnect', function(){
         // console.log('user disconnected');
     });
 
-    socket.on('to user', function(msg){
-        socket.broadcast.emit('to user', msg);
-        console.log(msg);
+    socket.on('to user', function(data){
+        console.log('(Admin): Send message to: ' + data.uid);
+        io.sockets.to(clients[data.uid]).emit('to user', {
+            msg: data.msg,
+            uid: data.aid 
+        });
     });
 
-    socket.on('to moderator', function(msg){
-        socket.broadcast.emit('to moderator', msg);
-        console.log(msg);
+    socket.on('to moderator', function(data){
+
+        if (data.moderatorUid !== undefined) {
+            // Если клиенту назначен модератор
+            console.log('(User): Send message to defined: ' + data.moderatorUid);
+            io.sockets.to(admins[data.moderatorUid]).emit(data);
+        } else {
+            // Назначаем модератора
+            var modUid = getModerator();
+            console.log('(User): Send message to: ' + modUid);
+            io.sockets.to(admins[modUid]).emit("to moderator", data);
+        }
     });
 
     socket.on("userAuth", function(user) {
-        currentUIDS[user.uid] = socket.id;
-        if (currentUIDS[user.uid] !== undefined) {
+        if (clients[user.uid] !== undefined) {
             console.log('Пользователь зашел на страницу: ' +  user.page );
             showChat(user.uid);
         } else {
             console.log('Новый юзер.');
         }
+        clients[user.uid] = socket.id;
     });
 
-    socket.on("adminAuth", function(uid) {
-        adminsIds.contains(uid, function(ex){
-            if (ex) {
-                console.log('Админ лазит по страницам.');
-            } else {
-                console.log('Пришел админ.')
-                adminsIds.push(uid);
-            }
-        })
+    socket.on("adminAuth", function(mod) {
+        console.log(admins);
+        if (admins[mod.uid] !== undefined) {
+            console.log('Админ лазит по страницам.');
+        } else {
+            console.log('Пришел админ.');
+        }
+        admins[mod.uid] = socket.id;
+        console.log(admins);
     });
 });

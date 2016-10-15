@@ -5,6 +5,7 @@
             userId: 'dmChatUserId',
             history: 'dmChatHistoriess'
         },
+        moderatorUid: null,
         childs: null,
         options: {
             server: "http://vsesvit.local:8008",
@@ -50,7 +51,8 @@
             if (e.which == 13) {
                 var msg = this.childs.field.val();
                 this.childs.head.hide();
-                this.socket.emit('to moderator', msg);
+                console.log({msg: msg, uid: this.userId});
+                this.socket.emit('to moderator', {msg: msg, uid: this.userId});
                 this._appendUserMsg(msg);
                 this._toHistory({
                     sender: 'user',
@@ -91,8 +93,12 @@
                 });
             }
         },
-        _appendNewMessage: function(msg) {
-            this._appendAdminMsg(msg);
+        _appendNewMessage: function(data) {
+            console.log('Incoming msg: ' + data.msg);
+            if (this.moderatorUid === undefined) {
+                this.moderatorUid = data.aid;
+            }
+            this._appendAdminMsg(data.msg);
             this._toHistory({
                 sender: 'moderator',
                 message: msg
